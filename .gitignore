@@ -1,0 +1,7 @@
+prompt.md
+.DS_Store
+Thumbs.db
+Desktop.ini
+*.log
+.vscode/
+.idea/
