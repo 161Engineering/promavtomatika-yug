@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="1100" viewBox="0 0 900 1100" fill="none">
+  <rect width="900" height="1100" fill="#F5F8FC"/>
+  <rect x="74" y="72" width="752" height="956" rx="34" fill="#FFFFFF" stroke="#D5DEEA" stroke-width="4"/>
+  <circle cx="450" cy="360" r="152" fill="#E4ECF6"/>
+  <path d="M304 770C304 676.112 380.112 600 474 600H426C519.888 600 596 676.112 596 770V826H304V770Z" fill="#E4ECF6"/>
+  <rect x="190" y="866" width="520" height="26" rx="13" fill="#CAD8E8"/>
+  <rect x="246" y="918" width="408" height="22" rx="11" fill="#CAD8E8"/>
+  <text x="205" y="160" fill="#17212B" font-family="Arial, sans-serif" font-size="44" font-weight="700">Профессиональное фото</text>
+</svg>
