@@ -1,0 +1,57 @@
+<svg width="720" height="420" viewBox="0 0 720 420" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bg" x1="50" y1="44" x2="657" y2="377" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#F8FBFF"/>
+      <stop offset="1" stop-color="#EDF4FB"/>
+    </linearGradient>
+    <linearGradient id="network" x1="153" y1="210" x2="560" y2="214" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#0E5EA8"/>
+      <stop offset="1" stop-color="#0A477D"/>
+    </linearGradient>
+  </defs>
+  <rect width="720" height="420" rx="28" fill="url(#bg)"/>
+  <g opacity="0.8">
+    <path d="M68 84H652" stroke="#D9E3EE" stroke-width="1.5"/>
+    <path d="M68 148H652" stroke="#D9E3EE" stroke-width="1.5"/>
+    <path d="M68 212H652" stroke="#D9E3EE" stroke-width="1.5"/>
+    <path d="M68 276H652" stroke="#D9E3EE" stroke-width="1.5"/>
+    <path d="M68 340H652" stroke="#D9E3EE" stroke-width="1.5"/>
+    <path d="M132 52V368" stroke="#D9E3EE" stroke-width="1.5"/>
+    <path d="M236 52V368" stroke="#D9E3EE" stroke-width="1.5"/>
+    <path d="M340 52V368" stroke="#D9E3EE" stroke-width="1.5"/>
+    <path d="M444 52V368" stroke="#D9E3EE" stroke-width="1.5"/>
+    <path d="M548 52V368" stroke="#D9E3EE" stroke-width="1.5"/>
+  </g>
+  <path d="M160 250L242 188L332 208L430 162L532 234" stroke="url(#network)" stroke-width="10" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M332 208L338 272L430 162" stroke="#6E90B1" stroke-width="6" stroke-linecap="round" stroke-linejoin="round" opacity="0.8"/>
+  <g>
+    <circle cx="160" cy="250" r="18" fill="#0E5EA8"/>
+    <circle cx="242" cy="188" r="18" fill="#0E5EA8"/>
+    <circle cx="332" cy="208" r="18" fill="#0E5EA8"/>
+    <circle cx="430" cy="162" r="18" fill="#0E5EA8"/>
+    <circle cx="532" cy="234" r="18" fill="#0E5EA8"/>
+    <circle cx="338" cy="272" r="18" fill="#90A9C4"/>
+    <circle cx="160" cy="250" r="7" fill="#fff"/>
+    <circle cx="242" cy="188" r="7" fill="#fff"/>
+    <circle cx="332" cy="208" r="7" fill="#fff"/>
+    <circle cx="430" cy="162" r="7" fill="#fff"/>
+    <circle cx="532" cy="234" r="7" fill="#fff"/>
+    <circle cx="338" cy="272" r="7" fill="#fff"/>
+  </g>
+  <g fill="#17212B" font-family="IBM Plex Sans, Segoe UI, sans-serif" font-size="18" font-weight="600">
+    <text x="112" y="288">Астрахань</text>
+    <text x="198" y="172">Волгоград</text>
+    <text x="294" y="194">Ставрополь</text>
+    <text x="392" y="146">Ростов-на-Дону</text>
+    <text x="492" y="270">Краснодар</text>
+    <text x="302" y="312">ЮФО</text>
+  </g>
+  <g opacity="0.7">
+    <rect x="84" y="56" width="176" height="52" rx="16" fill="#FFFFFF" stroke="#D5DEEA" stroke-width="2"/>
+    <path d="M108 82H170" stroke="#0E5EA8" stroke-width="4" stroke-linecap="round"/>
+    <path d="M108 96H234" stroke="#9CB0C4" stroke-width="4" stroke-linecap="round"/>
+    <rect x="474" y="300" width="160" height="48" rx="16" fill="#FFFFFF" stroke="#D5DEEA" stroke-width="2"/>
+    <path d="M498 324H580" stroke="#0E5EA8" stroke-width="4" stroke-linecap="round"/>
+    <path d="M498 338H608" stroke="#9CB0C4" stroke-width="4" stroke-linecap="round"/>
+  </g>
+</svg>

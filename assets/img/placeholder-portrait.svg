@@ -1,9 +1,11 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="900" height="1100" viewBox="0 0 900 1100" fill="none">
-  <rect width="900" height="1100" fill="#F5F8FC"/>
+  <rect width="900" height="1100" fill="#F5F9FD"/>
   <rect x="74" y="72" width="752" height="956" rx="34" fill="#FFFFFF" stroke="#D5DEEA" stroke-width="4"/>
-  <circle cx="450" cy="360" r="152" fill="#E4ECF6"/>
-  <path d="M304 770C304 676.112 380.112 600 474 600H426C519.888 600 596 676.112 596 770V826H304V770Z" fill="#E4ECF6"/>
-  <rect x="190" y="866" width="520" height="26" rx="13" fill="#CAD8E8"/>
-  <rect x="246" y="918" width="408" height="22" rx="11" fill="#CAD8E8"/>
-  <text x="205" y="160" fill="#17212B" font-family="Arial, sans-serif" font-size="44" font-weight="700">Профессиональное фото</text>
+  <circle cx="450" cy="364" r="152" fill="#E8F0F8"/>
+  <circle cx="450" cy="330" r="72" fill="#0E5EA8" opacity="0.92"/>
+  <path d="M302 780C302 683.902 379.902 606 476 606H424C520.098 606 598 683.902 598 780V838H302V780Z" fill="#DDE9F4"/>
+  <path d="M344 760C364 708 400 682 450 682C500 682 536 708 556 760" stroke="#0E5EA8" stroke-width="18" stroke-linecap="round"/>
+  <rect x="192" y="888" width="220" height="18" rx="9" fill="#0E5EA8"/>
+  <rect x="192" y="926" width="336" height="14" rx="7" fill="#CAD8E8"/>
+  <rect x="192" y="956" width="288" height="14" rx="7" fill="#DCE7F1"/>
 </svg>
