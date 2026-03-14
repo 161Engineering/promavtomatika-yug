@@ -344,9 +344,9 @@ function Build-ChecklistMarkup([array]$items, [string]$indent) {
     return ($lines -join "`n")
 }
 
-function Build-OtherArticles([hashtable]$article, [array]$allArticles, [hashtable]$profile) {
-    if ($profile.RelatedSlugs) {
-        $others = foreach ($slug in $profile.RelatedSlugs) {
+function Build-OtherArticles([hashtable]$article, [array]$allArticles, [hashtable]$articleProfile) {
+    if ($articleProfile.RelatedSlugs) {
+        $others = foreach ($slug in $articleProfile.RelatedSlugs) {
             $allArticles | Where-Object { $_.Slug -eq $slug } | Select-Object -First 1
         }
     }
@@ -365,13 +365,13 @@ function Build-ArticleHtml([hashtable]$article, [array]$allArticles) {
     $title = Escape-Html $article.SeoTitle
     $description = Escape-Html $article.Description
     $h1 = Escape-Html $article.Title
-    $profile = $articleProfiles[$article.Slug]
-    $otherArticles = Build-OtherArticles $article $allArticles $profile
-    $practiceParagraph = Build-ParagraphMarkup $profile.PracticeParagraph '                    '
-    $systemsParagraph = Build-ParagraphMarkup $profile.SystemsParagraph '                    '
-    $problemsParagraph = Build-ParagraphMarkup $profile.ProblemsParagraph '                    '
-    $recommendationsParagraph = Build-ParagraphMarkup $profile.RecommendationsParagraph '                    '
-    $checklistMarkup = Build-ChecklistMarkup $profile.Checklist '                        '
+    $articleProfile = $articleProfiles[$article.Slug]
+    $otherArticles = Build-OtherArticles $article $allArticles $articleProfile
+    $practiceParagraph = Build-ParagraphMarkup $articleProfile.PracticeParagraph '                    '
+    $systemsParagraph = Build-ParagraphMarkup $articleProfile.SystemsParagraph '                    '
+    $problemsParagraph = Build-ParagraphMarkup $articleProfile.ProblemsParagraph '                    '
+    $recommendationsParagraph = Build-ParagraphMarkup $articleProfile.RecommendationsParagraph '                    '
+    $checklistMarkup = Build-ChecklistMarkup $articleProfile.Checklist '                        '
 
     @"
 <!DOCTYPE html>
@@ -418,8 +418,8 @@ function Build-ArticleHtml([hashtable]$article, [array]$allArticles) {
                 <div class="hero-panel page-hero-shell">
                     <div class="page-hero-copy">
                         <h1>$h1</h1>
-                        <p class="lead">$($profile.HeroLead)</p>
-                        <p>$($profile.HeroSupport)</p>
+                        <p class="lead">$($articleProfile.HeroLead)</p>
+                        <p>$($articleProfile.HeroSupport)</p>
                         <p>$($article.RegionNote) Для компании ПромАвтоматика Юг такой подход является практическим, а не декларативным: основной профиль работ связан с объектами, где электромонтаж, КИПиА, логика управления и запуск должны быть согласованы между собой на уровне реального ввода оборудования в эксплуатацию.</p>
                     </div>
                     <div class="page-hero-side">
@@ -445,14 +445,14 @@ function Build-ArticleHtml([hashtable]$article, [array]$allArticles) {
         <section class="section">
             <div class="container two-column">
                 <article class="info-box">
-                    <h2>$($profile.PracticeTitle)</h2>
+                    <h2>$($articleProfile.PracticeTitle)</h2>
 $practiceParagraph
                     <p>На объектах из категории $($article.ObjectFocus) это особенно заметно. На котельных автоматизация связана с защитами и насосными группами, на очистных сооружениях ключевую роль играют уровни, расход, аналитика и алгоритмы насосов, на тепличных комплексах критичны микроклимат и энергоснабжение, а на промышленных предприятиях важна увязка автоматики с уже существующей электротехнической инфраструктурой. Поэтому инженерный результат определяется не количеством устройств, а качеством их совместной работы.</p>
                     <p>С точки зрения подрядной практики это означает, что инженерные решения по теме статьи нужно закладывать с учетом последующей эксплуатации. Система должна быть не просто смонтирована, а понятна для диагностики, обслуживаема, корректно документирована и готова к реальному режиму работы. Иначе объект формально будет закрыт по актам, но останется нестабильным в эксплуатации.</p>
                     <p>Для B2B-заказчика важен еще один аспект: границы ответственности между проектировщиком, поставщиком оборудования, монтажной организацией и наладчиками. Если эти границы определены только формально, а инженерная логика не собрана в единый процесс, заказчик получает спорную зону, где каждая сторона считает проблему чужой. Поэтому грамотная реализация темы статьи всегда опирается на понятную структуру взаимодействия: кто выдает перечни сигналов, кто отвечает за питание, кто подтверждает алгоритмы, кто принимает полевые цепи и кто запускает объект в комплексе.</p>
                 </article>
                 <article class="highlight">
-                    <h2>$($profile.SystemsTitle)</h2>
+                    <h2>$($articleProfile.SystemsTitle)</h2>
 $systemsParagraph
                     <p>При этом важно различать, что именно управляет оборудованием, а что только отображает состояние. Например, диспетчеризация не заменяет автоматику, а полевой датчик сам по себе не обеспечивает устойчивый режим без корректной обработки сигнала в шкафу или контроллере. На практике ошибки в понимании этих ролей и становятся причиной проблем уже на стадии монтажа или пусконаладки.</p>
                 </article>
@@ -470,7 +470,7 @@ $checklistMarkup
                     <p>На реальном объекте задача подрядчика заключается не только в физической установке этого оборудования, но и в инженерной увязке между ним. Нужны корректные перечни сигналов, понимание назначения каждого канала, согласование питания и защит, маркировка, исполнительная документация и условия для нормальной диагностики после запуска. Это особенно критично там, где объект состоит из нескольких распределенных узлов или вводится в эксплуатацию поэтапно.</p>
                 </article>
                 <article class="highlight">
-                    <h2>$($profile.ProblemsTitle)</h2>
+                    <h2>$($articleProfile.ProblemsTitle)</h2>
 $problemsParagraph
                     <p>На котельных это проявляется в неправильной логике резервирования и защиты, на очистных сооружениях — в ошибках по уровням, аварийным режимам и телеметрии, на тепличных комплексах — в нарушении алгоритмов микроклимата и полива, на насосных станциях — в сбоях управления группами насосов, на промышленных предприятиях — в конфликте новой автоматики со старой инфраструктурой. Практика показывает, что большая часть проблем выявляется не на бумаге, а уже при первом комплексном пуске.</p>
                 </article>
@@ -480,7 +480,7 @@ $problemsParagraph
         <section class="section">
             <div class="container two-column">
                 <article class="info-box">
-                    <h2>$($profile.RecommendationsTitle)</h2>
+                    <h2>$($articleProfile.RecommendationsTitle)</h2>
 $recommendationsParagraph
                     <p>Вторая практическая рекомендация связана с поэтапной верификацией. Не стоит откладывать проверку всего комплекса до финального запуска. Гораздо надежнее заранее проходить цепи питания, прозванивать сигналы, проверять приборы, калибровать датчики, тестировать исполнительные механизмы и подтверждать обмен по интерфейсам до начала полноформатной ПНР. Такой подход снижает число накопленных дефектов и делает запуск предсказуемым.</p>
                     <p>Третья рекомендация — держать в фокусе эксплуатацию. Хорошая инженерная система должна быть удобна не только для сдачи, но и для дальнейшей работы. Это означает адекватную маркировку, понятную структуру шкафов, исполнительную документацию, возможность изолировать неисправность без остановки всего объекта и корректную диагностику аварийных режимов. Именно такие детали отличают зрелый инженерный результат от формально завершенного монтажа.</p>
@@ -559,9 +559,18 @@ function Build-IndexHtml([array]$allArticles) {
     $cards = foreach ($article in $allArticles) {
         @"
                     <article class="article-card">
-                        <h2>$($article.Title)</h2>
-                        <p>$($article.Short)</p>
-                        <p><a href="$($article.Slug).html">Читать статью</a></p>
+                        <!-- IMAGE PROMPT:
+                        realistic industrial engineering photography for article "$($article.Title)", cinematic industrial lighting, high detail, professional engineering atmosphere
+                        -->
+                        <div class="image-placeholder image-placeholder-article" data-image="$($article.Slug).jpg" data-alt="$($article.Title)" data-label="$($article.Slug).jpg">
+                            <span>Инженерная статья</span>
+                        </div>
+                        <div class="article-card-body">
+                            <span class="card-kicker">Статья</span>
+                            <h2>$($article.Title)</h2>
+                            <p>$($article.Short)</p>
+                            <a class="button button-secondary" href="$($article.Slug).html">Читать</a>
+                        </div>
                     </article>
 "@
     }
@@ -636,8 +645,17 @@ function Build-IndexHtml([array]$allArticles) {
         </section>
 
         <section class="section">
-            <div class="container article-grid">
+            <div class="container">
+                <div class="section-header">
+                    <div>
+                        <span class="section-tag">Все статьи</span>
+                        <h2>Инженерные материалы по автоматизации и КИПиА</h2>
+                    </div>
+                    <p class="section-note">Карточки ниже подготовлены так, чтобы после добавления файлов в images визуальная часть раздела обновилась без изменения HTML.</p>
+                </div>
+                <div class="article-grid">
 $(($cards -join "`n"))
+                </div>
             </div>
         </section>
 

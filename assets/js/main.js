@@ -4,20 +4,60 @@ const contactForm = document.querySelector('[data-contact-form]');
 const yearSlot = document.querySelector('[data-year]');
 const mainScript = document.querySelector('script[src$="main.js"]');
 const assetBase = mainScript?.getAttribute('src')?.replace(/js\/main\.js$/, '') ?? 'assets/';
+const siteBase = assetBase.replace(/assets\/$/, '');
+const imageBase = `${siteBase}images/`;
 
 document.body.classList.add('has-motion');
 
 const projectVisuals = [
-  { keyword: 'Теплич', src: `${assetBase}img/project-greenhouse.svg` },
-  { keyword: 'ЦОД', src: `${assetBase}img/project-datacenter.svg` },
-  { keyword: 'Котель', src: `${assetBase}img/project-boiler.svg` },
-  { keyword: 'Очист', src: `${assetBase}img/project-treatment.svg` },
-  { keyword: 'Газ', src: `${assetBase}img/project-gas.svg` },
-  { keyword: 'Насос', src: `${assetBase}img/project-treatment.svg` },
-  { keyword: 'Холод', src: `${assetBase}img/project-datacenter.svg` },
-  { keyword: 'Склад', src: `${assetBase}img/project-industrial.svg` },
-  { keyword: 'Производ', src: `${assetBase}img/project-industrial.svg` },
+  { keyword: 'Теплич', photo: `${imageBase}project-greenhouse-complex.jpg`, fallback: `${assetBase}img/project-greenhouse.svg` },
+  { keyword: 'ЦОД', photo: `${imageBase}project-data-center.jpg`, fallback: `${assetBase}img/project-datacenter.svg` },
+  { keyword: 'Котель', photo: `${imageBase}project-boiler-house.jpg`, fallback: `${assetBase}img/project-boiler.svg` },
+  { keyword: 'Очист', photo: `${imageBase}project-treatment-facility.jpg`, fallback: `${assetBase}img/project-treatment.svg` },
+  { keyword: 'Газ', photo: `${imageBase}project-gas-distribution.jpg`, fallback: `${assetBase}img/project-gas.svg` },
+  { keyword: 'Насос', photo: `${imageBase}project-pumping-station.jpg`, fallback: `${assetBase}img/project-treatment.svg` },
+  { keyword: 'Холод', photo: `${imageBase}project-data-center.jpg`, fallback: `${assetBase}img/project-datacenter.svg` },
+  { keyword: 'Склад', photo: `${imageBase}project-industrial-line.jpg`, fallback: `${assetBase}img/project-industrial.svg` },
+  { keyword: 'Производ', photo: `${imageBase}project-industrial-line.jpg`, fallback: `${assetBase}img/project-industrial.svg` },
 ];
+
+const setImageWithFallback = (image, desiredSrc, fallbackSrc) => {
+  image.onerror = null;
+  image.onload = null;
+
+  image.onerror = () => {
+    image.onerror = null;
+    if (fallbackSrc) {
+      image.src = fallbackSrc;
+    }
+  };
+
+  image.src = desiredSrc;
+};
+
+const enhanceImagePlaceholders = () => {
+  document.querySelectorAll('.image-placeholder[data-image]').forEach((placeholder) => {
+    if (!(placeholder instanceof HTMLElement)) {
+      return;
+    }
+
+    const fileName = placeholder.dataset.image;
+    if (!fileName) {
+      return;
+    }
+
+    const altText = placeholder.dataset.alt || placeholder.textContent?.trim() || 'Инженерное изображение';
+    placeholder.setAttribute('role', 'img');
+    placeholder.setAttribute('aria-label', altText);
+
+    const loader = new Image();
+    loader.onload = () => {
+      placeholder.style.setProperty('--placeholder-image', `url("${imageBase}${fileName}")`);
+      placeholder.classList.add('is-loaded');
+    };
+    loader.src = `${imageBase}${fileName}`;
+  });
+};
 
 const heroEnhancements = {
   'services/industrial-automation.html': {
@@ -201,6 +241,7 @@ const enhancePageHero = () => {
 };
 
 enhancePageHero();
+enhanceImagePlaceholders();
 
 if (menuToggle && siteNav) {
   menuToggle.addEventListener('click', () => {
@@ -228,12 +269,12 @@ document.querySelectorAll('.portfolio-card').forEach((card) => {
 
   const match = projectVisuals.find((item) => title.textContent?.includes(item.keyword));
   if (match) {
-    image.src = match.src;
+    setImageWithFallback(image, match.photo, match.fallback);
   }
 });
 
 const revealItems = document.querySelectorAll(
-  '.hero-panel, .card, .service-card, .object-card, .region-card, .article-card, .portfolio-card, .process-card, .contact-card, .info-box, .photo-card, .highlight, .cta-strip, .table-like'
+  '.hero-panel, .hero-copy-panel, .hero-visual-panel, .card, .service-card, .object-card, .region-card, .article-card, .portfolio-card, .process-card, .contact-card, .info-box, .photo-card, .highlight, .cta-strip, .table-like, .competency-card, .number-card, .advantage-card, .workflow-step, .object-feature, .engineer-panel, .project-preview-card, .contact-action'
 );
 
 revealItems.forEach((item) => item.classList.add('reveal-on-scroll'));
