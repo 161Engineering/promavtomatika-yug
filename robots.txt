@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://161engineering.github.io/promavtomatika-yug/sitemap.xml
+Sitemap: http://diskei5i.beget.tech/sitemap.xml
