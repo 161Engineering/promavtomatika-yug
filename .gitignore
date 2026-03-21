@@ -1,7 +1,30 @@
+# Служебные файлы разработки
 prompt.md
+images/image-prompts.md
+
+# Служебные скрипты
+tools/
+*.ps1
+
+# Системные файлы
 .DS_Store
 Thumbs.db
 Desktop.ini
 *.log
+
+# IDE
 .vscode/
 .idea/
+
+# Node modules (если будут использоваться)
+node_modules/
+
+# Временные файлы
+*.tmp
+*.temp
+*.swp
+*~
+
+# Бэкапы
+*.bak
+*.backup
